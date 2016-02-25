@@ -7,7 +7,7 @@ PFont font;
 boolean release = false;
 boolean isOver = false;
 
-int centerX = 620;
+int centerX = 621;
 int centerY = 320;
 
 void setup(){
