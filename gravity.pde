@@ -7,6 +7,7 @@ boolean release = false;
 boolean isOver = false;
 
 Planet earth;
+Planet mars;
 
 float spring = 0.01;
 
@@ -23,6 +24,9 @@ void setup(){
   planetInvert = loadImage("earthInv.png");
   allComets = new ArrayList();
   earth = new Planet(new PVector(500, 500), planet.width, 800);
+  mars = new Planet(new PVector(900, 400), planet.width, 800);
+//  Balls = new ArrayList();
+//  mass = 8000;
   h = 80;
   font = createFont("Onyx", 12);
 }
@@ -118,8 +122,8 @@ void spawnComet(int x, int y) {
     int startX = x;
     int startY = y;
     
-    int intensityX = 1;
-    int intensityY = 1;
+    int intensityX = 2;
+    int intensityY = 2;
     
     float randomX = random(startX-5,startX+5);
     float randomY = random(startY-5,startY+5);
@@ -127,4 +131,4 @@ void spawnComet(int x, int y) {
     float randomVelocityY = random (intensityY*-1, intensityY);
     
     Comet newComet = new Comet(new PVector(randomX, randomY), new PVector(randomVelocityX, randomVelocityY), 10);
-}
+  }
