@@ -19,6 +19,8 @@ ArrayList<Planet> allPlanets = new ArrayList();
 
 void setup(){
   size(1280, 720);
+    tuioClient  = new TuioProcessing(this);
+
   frameRate(60);
   planet = loadImage("earth.png");
   planetInvert = loadImage("earthInv.png");
