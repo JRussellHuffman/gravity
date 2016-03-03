@@ -15,6 +15,7 @@ ArrayList<Body> toDestroy = new ArrayList();
 
 ArrayList<Comet> allComets = new ArrayList();
 ArrayList<Planet> allPlanets = new ArrayList();
+ArrayList<Body> allBodies = new ArrayList();
 
 
 void setup(){
@@ -25,6 +26,7 @@ void setup(){
   planet = loadImage("earth.png");
   planetInvert = loadImage("earthInv.png");
   allComets = new ArrayList();
+  allBodies = new ArrayList();
   earth = new Planet(new PVector(500, 500), planet.width, 800);
   mars = new Planet(new PVector(900, 400), planet.width, 800);
 //  Balls = new ArrayList();
@@ -48,12 +50,11 @@ void draw(){
   fill(150);
   noStroke();
   
-  for(Comet com : allComets){
-    com.Update();
-  }
+//  rect(tuioX,tuioY,100,100);
+ 
   
-  for(Planet plan : allPlanets){
-    plan.Update();
+  for(Body hotBod : allBodies){
+    hotBod.Update();
   }
   
   for(Body damned : toDestroy){

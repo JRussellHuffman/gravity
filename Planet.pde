@@ -5,6 +5,8 @@ class Planet extends Body {
     this.diameter = diameter;
     this.mass = mass;
     allPlanets.add(this);
+        BodyInit();
+
   }
   
   void Update(){
@@ -13,6 +15,7 @@ class Planet extends Body {
   
   void Die(){
     allPlanets.remove(this);
+    super.Die();
   }
   
   void draw(){
@@ -21,4 +24,3 @@ class Planet extends Body {
 
   }
 }
-
