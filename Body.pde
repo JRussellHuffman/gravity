@@ -19,6 +19,19 @@ abstract class Body {
     return direction;
   }
   
+  PVector gridGrav(PVector otherPos) {
+    PVector direction = new PVector(position.x - otherPos.x, position.y - otherPos.y);
+    direction.normalize();
+    float d = dist(otherPos.x, otherPos.y, position.x, position.y);
+    //if (d < 100) {
+      direction.mult(mass/(d*d));
+//    } else {
+//      direction.set(0,0);
+//    }
+    //how to make it go back to original position?
+    return direction;
+  }
+  
   abstract void draw();
 }
 

@@ -15,20 +15,39 @@ ArrayList<Body> toDestroy = new ArrayList();
 
 ArrayList<Comet> allComets = new ArrayList();
 ArrayList<Planet> allPlanets = new ArrayList();
+ArrayList<Grid> grid = new ArrayList();
 
-
+//grid stuff
+int gap = 30;
+int dotSize = 1;
+int roundedx;
+int roundedy;
+  
 void setup(){
   size(1280, 720);
   frameRate(60);
   planet = loadImage("earth.png");
   planetInvert = loadImage("earthInv.png");
   allComets = new ArrayList();
-  earth = new Planet(new PVector(500, 500), planet.width, 800);
-  mars = new Planet(new PVector(900, 400), planet.width, 800);
-//  Balls = new ArrayList();
-//  mass = 8000;
+  earth = new Planet(new PVector(600, 350), planet.width, 2000);
+  //mars = new Planet(new PVector(900, 400), planet.width, 2000);
   h = 80;
   font = createFont("Onyx", 12);
+  
+  gridSize(gap);
+  
+  for (int i = 0; i < roundedx+1; i++) {
+    for (int j = 0; j < roundedy+1; j++) {
+      grid.add(new Grid(gap*i, gap*j, dotSize));
+      grid.add(new Grid(gap*i + (gap/4), gap * j, dotSize));
+      grid.add(new Grid(gap*i, gap * j + (gap/4), dotSize));
+      grid.add(new Grid(gap*i + (gap/2), gap * j, dotSize));
+      grid.add(new Grid(gap*i, gap * j + (gap/2), dotSize));
+      grid.add(new Grid(gap*i + (gap/4*3), gap * j, dotSize));
+      grid.add(new Grid(gap*i, gap * j + (gap/4*3), dotSize));
+    }
+  }
+  
 }
 
 
@@ -57,24 +76,15 @@ void draw(){
   for(Body damned : toDestroy){
     damned.Die();
   }
+  
+  for (Grid gridItem : grid) {
+    gridItem.applyGravity();
+    gridItem.display();
+  }
+  
+  earth.checkhover();
+  //mars.checkhover();
 }
-
-/*
-void checkhover () {
-  PVector position = new PVector(mouseX, mouseY);
-  float dis = dist(position.x, position.y, centerX, centerY);
-    if ( dis < 60 || dis > 2000){
-      isOver = true;
-    } else {
-      isOver = false;
-    }
-    
-    if (release && isOver) {
-      centerX = mouseX;
-      centerY = mouseY;
-    }
-}
-*/
 
 void movePlanet () {
   //if (release && isOver) {
@@ -97,6 +107,7 @@ void movePlanet () {
   //    newY = mouseY;
   //  } 
   //}
+  
 }
 
 void mousePressed(){
@@ -122,13 +133,20 @@ void spawnComet(int x, int y) {
     int startX = x;
     int startY = y;
     
-    int intensityX = 2;
-    int intensityY = 2;
+    int intensityX = 5;
+    int intensityY = 5;
     
     float randomX = random(startX-5,startX+5);
     float randomY = random(startY-5,startY+5);
     float randomVelocityX = random (intensityX*-1, intensityX);
     float randomVelocityY = random (intensityY*-1, intensityY);
     
-    Comet newComet = new Comet(new PVector(randomX, randomY), new PVector(randomVelocityX, randomVelocityY), 10);
-  }
+    Comet newComet = new Comet(new PVector(randomX, randomY), new PVector(randomVelocityX, randomVelocityY), 5);
+}
+
+void gridSize(int e) {
+  float xCount = width/e;
+  roundedx = Math.round(xCount);
+  float yCount = height/e;
+  roundedy = Math.round(yCount);
+}
