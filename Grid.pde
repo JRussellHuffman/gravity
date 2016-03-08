@@ -1,3 +1,41 @@
+//grid stuff
+int gap = 30;
+int dotSize = 1;
+int roundedx;
+int roundedy;
+int gridSpring = 20; //lower number is strong
+
+void initializeGrid () {
+  gridSize(gap);
+
+  for (int i = 0; i < roundedx+1; i++) {
+    for (int j = 0; j < roundedy+1; j++) {
+      grid.add(new Grid(gap*i, gap*j, dotSize, gridSpring));
+      grid.add(new Grid(gap*i + (gap/4), gap * j, dotSize, gridSpring));
+      grid.add(new Grid(gap*i, gap * j + (gap/4), dotSize, gridSpring));
+      grid.add(new Grid(gap*i + (gap/2), gap * j, dotSize, gridSpring));
+      grid.add(new Grid(gap*i, gap * j + (gap/2), dotSize, gridSpring));
+      grid.add(new Grid(gap*i + (gap/4*3), gap * j, dotSize, gridSpring));
+      grid.add(new Grid(gap*i, gap * j + (gap/4*3), dotSize, gridSpring));
+    }
+  }
+}
+
+void drawGrid () {
+  for (Grid gridItem : grid) {
+    gridItem.applyGravity();
+    gridItem.keepShape();
+    gridItem.display();
+  }
+}
+
+void gridSize(int e) {
+  float xCount = width/e;
+  roundedx = Math.round(xCount);
+  float yCount = height/e;
+  roundedy = Math.round(yCount);
+}
+
 class Grid {
   
   int diameter;
@@ -10,14 +48,6 @@ class Grid {
     gravInfluence = new PVector(xin, yin);
     springBack = new PVector(xin, yin);
     spring = springIn;
-  }
-  
-  PVector gravityPushBack(PVector otherPos) {
-    PVector direction = new PVector(springBack.x - otherPos.x, springBack.y - otherPos.y);
-    direction.normalize();
-    float d = dist(otherPos.x, otherPos.y, springBack.x, springBack.y);
-    direction.mult(1000/(d*d));
-    return direction;
   }
   
  
@@ -41,8 +71,7 @@ class Grid {
     direction.normalize();
     float d = dist(gravInfluence.x, gravInfluence.y, springBack.x, springBack.y);
     direction.mult(d/spring);
-    PVector gravityReturn = direction;
-    gravInfluence.add(gravityReturn);
+    gravInfluence.add(direction);
   }
   
   void display() {
