@@ -38,6 +38,7 @@ void setup(){
 void draw(){
   background(0);
   float ds = dist(mouseX, mouseY, width/2, height/2 - 60);
+  drawGrid ();
   stroke(200*(ds/250), 100, 50);
   strokeWeight(4);
   //line(width/2, height/2 - h, mouseX, mouseY);
@@ -55,8 +56,6 @@ void draw(){
   for(Body damned : toDestroy){
     damned.Die();
   }
-  
-  drawGrid ();
   
   earth.checkhover();
   mars.checkhover();
