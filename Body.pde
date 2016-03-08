@@ -23,14 +23,18 @@ abstract class Body {
     PVector direction = new PVector(position.x - otherPos.x, position.y - otherPos.y);
     direction.normalize();
     float d = dist(otherPos.x, otherPos.y, position.x, position.y);
-    //if (d < 100) {
-      direction.mult(mass/(d*d));
-//    } else {
-//      direction.set(0,0);
-//    }
-    //how to make it go back to original position?
+    direction.mult((mass*2)/(d*d)); //double mass to exaggerate effect on grid
     return direction;
   }
+  
+//this method does crazy things...  
+//  PVector gridReturn(PVector otherPos) {
+//    PVector direction = new PVector(position.x - otherPos.x, position.y - otherPos.y);
+//    direction.normalize();
+//    float d = dist(otherPos.x, otherPos.y, position.x, position.y);
+//    direction.div(mass/(d*d));
+//    return direction;
+//  }
   
   abstract void draw();
 }

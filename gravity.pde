@@ -1,5 +1,6 @@
 PImage planet;
 PImage planetInvert;
+PImage star;
 short mass;
 byte h;
 PFont font;
@@ -22,15 +23,17 @@ int gap = 30;
 int dotSize = 1;
 int roundedx;
 int roundedy;
+int gridSpring = 10; //lower number is strong
   
 void setup(){
   size(1280, 720);
   frameRate(60);
   planet = loadImage("earth.png");
   planetInvert = loadImage("earthInv.png");
+  star = loadImage("star.png");
   allComets = new ArrayList();
-  earth = new Planet(new PVector(600, 350), planet.width, 2000);
-  //mars = new Planet(new PVector(900, 400), planet.width, 2000);
+  earth = new Planet(new PVector(600, 350), star.width-15, 5000); //15 pixel padding for sun "fuzzyness"
+  mars = new Planet(new PVector(900, 400), star.width-15, 5000); //15 pixel padding for sun "fuzzyness"
   h = 80;
   font = createFont("Onyx", 12);
   
@@ -38,13 +41,13 @@ void setup(){
   
   for (int i = 0; i < roundedx+1; i++) {
     for (int j = 0; j < roundedy+1; j++) {
-      grid.add(new Grid(gap*i, gap*j, dotSize));
-      grid.add(new Grid(gap*i + (gap/4), gap * j, dotSize));
-      grid.add(new Grid(gap*i, gap * j + (gap/4), dotSize));
-      grid.add(new Grid(gap*i + (gap/2), gap * j, dotSize));
-      grid.add(new Grid(gap*i, gap * j + (gap/2), dotSize));
-      grid.add(new Grid(gap*i + (gap/4*3), gap * j, dotSize));
-      grid.add(new Grid(gap*i, gap * j + (gap/4*3), dotSize));
+      grid.add(new Grid(gap*i, gap*j, dotSize, gridSpring));
+      grid.add(new Grid(gap*i + (gap/4), gap * j, dotSize, gridSpring));
+      grid.add(new Grid(gap*i, gap * j + (gap/4), dotSize, gridSpring));
+      grid.add(new Grid(gap*i + (gap/2), gap * j, dotSize, gridSpring));
+      grid.add(new Grid(gap*i, gap * j + (gap/2), dotSize, gridSpring));
+      grid.add(new Grid(gap*i + (gap/4*3), gap * j, dotSize, gridSpring));
+      grid.add(new Grid(gap*i, gap * j + (gap/4*3), dotSize, gridSpring));
     }
   }
   
@@ -79,11 +82,12 @@ void draw(){
   
   for (Grid gridItem : grid) {
     gridItem.applyGravity();
+    gridItem.keepShape();
     gridItem.display();
   }
   
   earth.checkhover();
-  //mars.checkhover();
+  mars.checkhover();
 }
 
 void movePlanet () {

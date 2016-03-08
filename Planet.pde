@@ -33,7 +33,7 @@ class Planet extends Body {
   
   void draw(){
     imageMode(CENTER);
-        image(planet, position.x, position.y); 
+        image(star, position.x, position.y); 
 
   }
 }
