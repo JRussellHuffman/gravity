@@ -1,5 +1,6 @@
 PImage planet;
 PImage planetInvert;
+PImage star;
 short mass;
 byte h;
 PFont font;
@@ -15,8 +16,8 @@ ArrayList<Body> toDestroy = new ArrayList();
 
 ArrayList<Comet> allComets = new ArrayList();
 ArrayList<Planet> allPlanets = new ArrayList();
-
-
+ArrayList<Grid> grid = new ArrayList();
+  
 void setup(){
   size(1280, 720);
     tuioClient  = new TuioProcessing(this);
@@ -24,24 +25,22 @@ void setup(){
   frameRate(60);
   planet = loadImage("earth.png");
   planetInvert = loadImage("earthInv.png");
+  star = loadImage("star.png");
   allComets = new ArrayList();
-  earth = new Planet(new PVector(500, 500), planet.width, 800);
-  mars = new Planet(new PVector(900, 400), planet.width, 800);
-//  Balls = new ArrayList();
-//  mass = 8000;
+  earth = new Planet(new PVector(600, 350), star.width-15, 5000); //15 pixel padding for sun "fuzzyness"
+  mars = new Planet(new PVector(900, 400), star.width-15, 5000); //15 pixel padding for sun "fuzzyness"
   h = 80;
   font = createFont("Onyx", 12);
+  
+  initializeGrid();
+  
 }
 
 
 void draw(){
   background(0);
-  //checkhover();
-  //movePlanet();
-  text("w - initial height up", 10, 10);
-  text("s - initial hieght down", 10, 20);
-  text("c - clear", 10, 30);
   float ds = dist(mouseX, mouseY, width/2, height/2 - 60);
+  drawGrid ();
   stroke(200*(ds/250), 100, 50);
   strokeWeight(4);
   //line(width/2, height/2 - h, mouseX, mouseY);
@@ -59,46 +58,9 @@ void draw(){
   for(Body damned : toDestroy){
     damned.Die();
   }
-}
-
-/*
-void checkhover () {
-  PVector position = new PVector(mouseX, mouseY);
-  float dis = dist(position.x, position.y, centerX, centerY);
-    if ( dis < 60 || dis > 2000){
-      isOver = true;
-    } else {
-      isOver = false;
-    }
-    
-    if (release && isOver) {
-      centerX = mouseX;
-      centerY = mouseY;
-    }
-}
-*/
-
-void movePlanet () {
-  //if (release && isOver) {
-  //  int formerX = centerX;
-  //  int formerY = centerY;
-  //  int newX;
-  //  int newY;
-  //  if (formerX > mouseX) {
-  //    newX = formerX - mouseX;
-  //  } else if (formerX < mouseX) {
-  //    newX = mouseX - formerX;
-  //  } else {
-  //    newX = mouseX;
-  //  }
-  //  if (formerY > mouseY) {
-  //    newY = formerY - mouseY;
-  //  } else if (formerY < mouseY) {
-  //    newY = mouseY - formerY;
-  //  } else {
-  //    newY = mouseY;
-  //  } 
-  //}
+  
+  earth.checkhover();
+  mars.checkhover();
 }
 
 void mousePressed(){
@@ -111,11 +73,7 @@ void mouseReleased() {
 }
 
 void keyPressed(){
-  if (key == 'w' && h < 121){
-    h++;
-  }else if (key == 's' && h > 61){
-    h--;
-  }else if (key == 'c'){
+  if (key == 'c'){
     allComets.clear();
   }
 }
@@ -124,13 +82,13 @@ void spawnComet(int x, int y) {
     int startX = x;
     int startY = y;
     
-    int intensityX = 2;
-    int intensityY = 2;
+    int intensityX = 5;
+    int intensityY = 5;
     
     float randomX = random(startX-5,startX+5);
     float randomY = random(startY-5,startY+5);
     float randomVelocityX = random (intensityX*-1, intensityX);
     float randomVelocityY = random (intensityY*-1, intensityY);
     
-    Comet newComet = new Comet(new PVector(randomX, randomY), new PVector(randomVelocityX, randomVelocityY), 10);
-  }
+    Comet newComet = new Comet(new PVector(randomX, randomY), new PVector(randomVelocityX, randomVelocityY), 5);
+}
