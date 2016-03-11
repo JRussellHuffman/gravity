@@ -1,5 +1,7 @@
 abstract class Body {
   PVector position;
+    PVector velocity;
+
   float diameter;
   float mass;
   
@@ -10,10 +12,17 @@ abstract class Body {
   
   void BodyInit(){
     allBodies.add(this);
+        position = new PVector();
+        velocity = new PVector();
+
   }
   
   void Destroy(){
     toDestroy.add(this);
+  }
+  
+  void applyForce(PVector force){
+    
   }
   
 

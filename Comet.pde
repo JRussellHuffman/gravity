@@ -1,15 +1,17 @@
 class Comet extends Body {
-  PVector velocity;
 
   Comet(PVector pos, PVector vel, float diameter) {
+        BodyInit();
+
     position = pos;
     velocity = vel;
     this.diameter = diameter;
     allComets.add(this);
-    BodyInit();
   }
 
   void Update() {
+        println(position);
+
     collide();
     applyGravity();
     move();
@@ -30,8 +32,37 @@ class Comet extends Body {
       }
     }
     
+     for(Star star : allStars){
+      if(dist(position.x, position.y, star.position.x, star.position.y) <= (diameter + star.diameter)/2){
+        Destroy();
+      }
+    }
+    
     for (Comet other : allComets) {
       if (other == this) continue;
+      //check for collision
+      if(dist(other.position.x, other.position.y, this.position.x, this.position.y) < (other.diameter/2 + this.diameter/2)){
+            //float overlap = ( other.diameter/2 + this.diameter/2) - dist(other.position.x, other.position.y, this.position.x, this.position.y); 
+            Comet larger = this;
+            Comet smaller = other;
+      if (diameter < other.diameter) {
+          smaller = this;
+          larger = other;
+        }  
+        
+        float areaSwapped = PI * smaller.diameter * smaller.diameter - PI * (smaller.diameter - 1) * (smaller.diameter - 1); // area of outermost pixel ring;
+        smaller.diameter --;
+        
+        float larger_area = PI * larger.diameter * larger.diameter;
+        larger_area += areaSwapped;
+        larger.diameter = sqrt(larger_area/PI);
+        
+             
+             
+              
+      }
+      
+      
       float dx = other.position.x - this.position.x;
       float dy = other.position.y - this.position.y;
       float distance = sqrt(dx*dx + dy*dy);
@@ -46,6 +77,7 @@ class Comet extends Body {
         velocity.y -= ay;
         other.velocity.x += ax;
         other.velocity.y += ay;
+        /*
         if (diameter >= other.diameter) {
           other.diameter -=1;
           diameter +=1;
@@ -53,7 +85,9 @@ class Comet extends Body {
           diameter -=1;
           other.diameter +=1;
         }
+        */
       }
+      
     }
   }
 
@@ -62,8 +96,8 @@ class Comet extends Body {
   }
 
   void applyGravity() {
-    for(Planet planet : allPlanets){
-    PVector gravity = planet.gravityAt(position);
+    for(Star star : allStars){
+    PVector gravity = star.gravityAt(position);
     velocity.add(gravity);
     }
   }

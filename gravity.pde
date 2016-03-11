@@ -7,8 +7,7 @@ PFont font;
 boolean release = false;
 boolean isOver = false;
 
-Planet earth;
-Planet mars;
+Star sun;
 
 float spring = 0.01;
 
@@ -16,17 +15,21 @@ ArrayList<Body> toDestroy = new ArrayList();
 
 ArrayList<Comet> allComets = new ArrayList();
 ArrayList<Planet> allPlanets = new ArrayList();
-<<<<<<< HEAD
+ArrayList<Star> allStars = new ArrayList();
 ArrayList<Body> allBodies = new ArrayList();
-
-
-=======
 ArrayList<Grid> grid = new ArrayList();
+ArrayList<Cursor> cursors = new ArrayList();
+
+Cursor mouseCursor;
+
+
   
->>>>>>> master
 void setup(){
   size(1280, 720);
-    tuioClient  = new TuioProcessing(this);
+  SetupStarMap();
+  SetupCursorMap();
+  SetupIdToType();
+  tuioClient  = new TuioProcessing(this);
 
   frameRate(60);
   planet = loadImage("earth.png");
@@ -34,8 +37,7 @@ void setup(){
   star = loadImage("star.png");
   allComets = new ArrayList();
   allBodies = new ArrayList();
-  earth = new Planet(new PVector(600, 350), star.width-15, 5000); //15 pixel padding for sun "fuzzyness"
-  mars = new Planet(new PVector(900, 400), star.width-15, 5000); //15 pixel padding for sun "fuzzyness"
+  //sun = new Star(new PVector(600, 350), star.width-15, 5000); //15 pixel padding for sun "fuzzyness"
   h = 80;
   font = createFont("Onyx", 12);
   
@@ -45,6 +47,7 @@ void setup(){
 
 
 void draw(){
+  TuioUpdate();
   background(0);
   float ds = dist(mouseX, mouseY, width/2, height/2 - 60);
   drawGrid ();
@@ -64,18 +67,17 @@ void draw(){
   for(Body damned : toDestroy){
     damned.Die();
   }
-  
-  earth.checkhover();
-  mars.checkhover();
 }
 
 void mousePressed(){
- spawnComet(mouseX, mouseY);
+  mouseCursor = new Cursor();
   release = true;
 }
 
 void mouseReleased() {
+  mouseCursor.OnRemove();
   release = false;
+  
 }
 
 void keyPressed(){
@@ -84,18 +86,5 @@ void keyPressed(){
   }
 }
 
-void spawnComet(int x, int y) {
-    int startX = x;
-    int startY = y;
-    
-    int intensityX = 5;
-    int intensityY = 5;
-    
-    float randomX = random(startX-5,startX+5);
-    float randomY = random(startY-5,startY+5);
-    float randomVelocityX = random (intensityX*-1, intensityX);
-    float randomVelocityY = random (intensityY*-1, intensityY);
-    
-    Comet newComet = new Comet(new PVector(randomX, randomY), new PVector(randomVelocityX, randomVelocityY), 10);
-  }
+
 
