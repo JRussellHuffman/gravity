@@ -16,8 +16,14 @@ ArrayList<Body> toDestroy = new ArrayList();
 
 ArrayList<Comet> allComets = new ArrayList();
 ArrayList<Planet> allPlanets = new ArrayList();
+<<<<<<< HEAD
+ArrayList<Body> allBodies = new ArrayList();
+
+
+=======
 ArrayList<Grid> grid = new ArrayList();
   
+>>>>>>> master
 void setup(){
   size(1280, 720);
     tuioClient  = new TuioProcessing(this);
@@ -27,6 +33,7 @@ void setup(){
   planetInvert = loadImage("earthInv.png");
   star = loadImage("star.png");
   allComets = new ArrayList();
+  allBodies = new ArrayList();
   earth = new Planet(new PVector(600, 350), star.width-15, 5000); //15 pixel padding for sun "fuzzyness"
   mars = new Planet(new PVector(900, 400), star.width-15, 5000); //15 pixel padding for sun "fuzzyness"
   h = 80;
@@ -47,12 +54,11 @@ void draw(){
   fill(150);
   noStroke();
   
-  for(Comet com : allComets){
-    com.Update();
-  }
+//  rect(tuioX,tuioY,100,100);
+ 
   
-  for(Planet plan : allPlanets){
-    plan.Update();
+  for(Body hotBod : allBodies){
+    hotBod.Update();
   }
   
   for(Body damned : toDestroy){
@@ -90,5 +96,6 @@ void spawnComet(int x, int y) {
     float randomVelocityX = random (intensityX*-1, intensityX);
     float randomVelocityY = random (intensityY*-1, intensityY);
     
-    Comet newComet = new Comet(new PVector(randomX, randomY), new PVector(randomVelocityX, randomVelocityY), 5);
-}
+    Comet newComet = new Comet(new PVector(randomX, randomY), new PVector(randomVelocityX, randomVelocityY), 10);
+  }
+

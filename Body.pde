@@ -2,10 +2,16 @@ abstract class Body {
   PVector position;
   float diameter;
   float mass;
-
+  
   abstract void Update();
-  abstract void Die();
-
+  void Die(){
+  allBodies.remove(this);
+  }
+  
+  void BodyInit(){
+    allBodies.add(this);
+  }
+  
   void Destroy(){
     toDestroy.add(this);
   }
@@ -38,4 +44,3 @@ abstract class Body {
   
   abstract void draw();
 }
-

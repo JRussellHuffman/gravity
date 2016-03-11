@@ -8,12 +8,14 @@ boolean verbose = true;
 // called when an object is added to the scene
 void addTuioObject(TuioObject tobj) {
   if (verbose) println("add obj "+tobj.getSymbolID()+" ("+tobj.getSessionID()+") "+tobj.getX()+" "+tobj.getY()+" "+tobj.getAngle());
+  Star son = new Star(tobj);
 }
 
 // called when an object is moved
 void updateTuioObject (TuioObject tobj) {
   if (verbose) println("set obj "+tobj.getSymbolID()+" ("+tobj.getSessionID()+") "+tobj.getX()+" "+tobj.getY()+" "+tobj.getAngle()
           +" "+tobj.getMotionSpeed()+" "+tobj.getRotationSpeed()+" "+tobj.getMotionAccel()+" "+tobj.getRotationAccel());
+
 }
 
 // called when an object is removed from the scene
@@ -65,5 +67,4 @@ void removeTuioBlob(TuioBlob tblb) {
 // called at the end of each TUIO frame
 void refresh(TuioTime frameTime) {
   if (verbose) println("frame #"+frameTime.getFrameID()+" ("+frameTime.getTotalMilliseconds()+")");
-  if (callback) redraw();
 }

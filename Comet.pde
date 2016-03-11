@@ -6,6 +6,7 @@ class Comet extends Body {
     velocity = vel;
     this.diameter = diameter;
     allComets.add(this);
+    BodyInit();
   }
 
   void Update() {
@@ -17,6 +18,8 @@ class Comet extends Body {
   
   void Die(){
     allComets.remove(this);
+    super.Die();
+
   }
 
   void collide() {
@@ -70,4 +73,3 @@ class Comet extends Body {
     ellipse(position.x, position.y, diameter, diameter);
   }
 }
-
