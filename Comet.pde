@@ -69,7 +69,7 @@ class Comet extends Body {
   }
 
   void draw() {
-    fill(255, 200);
+    fill(200, 240);
     ellipse(position.x, position.y, diameter, diameter);
   }
 }
