@@ -10,7 +10,7 @@ class Comet extends Body {
   }
 
   void Update() {
-        println(position);
+        //println(position);
 
     collide();
     applyGravity();
@@ -33,10 +33,10 @@ class Comet extends Body {
     }
     
      for(Star star : allStars){
-      if(dist(position.x, position.y, star.position.x, star.position.y) <= (diameter + star.diameter)/2){
-        Destroy();
-      }
-    }
+       if(dist(position.x, position.y, star.position.x, star.position.y) <= (diameter + star.diameter)/2){
+         Destroy();
+       }
+     }
     
     for (Comet other : allComets) {
       if (other == this) continue;
@@ -77,15 +77,6 @@ class Comet extends Body {
         velocity.y -= ay;
         other.velocity.x += ax;
         other.velocity.y += ay;
-        /*
-        if (diameter >= other.diameter) {
-          other.diameter -=1;
-          diameter +=1;
-        } else {
-          diameter -=1;
-          other.diameter +=1;
-        }
-        */
       }
       
     }
@@ -101,9 +92,34 @@ class Comet extends Body {
     velocity.add(gravity);
     }
   }
+  
+  void tail() {
+    float distanceFromStar = 0;
+    PVector direction;
+    for(Star star : allStars){
+      distanceFromStar = dist(position.x, position.y, star.position.x, star.position.y);
+       
+      direction = new PVector(position.x - star.position.x, position.y - star.position.y);
+      direction.normalize();      
+      fill(185, 234, 255, 15);
+      //draw several ellipse to show effect
+      for (int i = 4; i < 12; i++) {
+        ellipse(position.x+(direction.x*((i-5)*500/distanceFromStar)), position.y+(direction.y*((i-5)*500/distanceFromStar)), 5/distanceFromStar*i*100, 5/distanceFromStar*i*100);
+      }
+    }
+    
+  }
 
   void draw() {
-    fill(200, 240);
-    ellipse(position.x, position.y, diameter, diameter);
+    if (diameter > 15) {
+      fill(220,(255/(diameter/10)),(240/(diameter/10)), 100);
+      ellipse(position.x, position.y, diameter+5, diameter+5);
+      image(planet, position.x, position.y, diameter, diameter);
+    } else {
+      tail();
+      //fill(220,(255/(diameter/10)),(240/(diameter/10)));
+      fill(220, 255,240);
+      ellipse(position.x, position.y, diameter, diameter);
+    }
   }
 }
