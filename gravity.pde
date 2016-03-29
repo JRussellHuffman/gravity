@@ -34,7 +34,7 @@ void setup(){
 
   frameRate(60);
   planet = loadImage("planet.png");
-  star = loadImage("star.png");
+  star = loadImage("redDwarf.png");
   blackHole = loadImage("blackHole.png");
   allComets = new ArrayList();
   allBodies = new ArrayList();
