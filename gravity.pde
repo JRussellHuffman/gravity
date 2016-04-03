@@ -58,7 +58,9 @@ void draw(){
   noStroke();
   
 //  rect(tuioX,tuioY,100,100);
- 
+ for(Cursor cur : cursors){
+    cur.Update();
+  }
   
   for(Body hotBod : allBodies){
     hotBod.Update();
