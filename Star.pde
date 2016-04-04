@@ -1,6 +1,7 @@
 class Star extends Body {
   public TuioObject tobj;
   boolean isFake; //used for debugging without reactivision
+  PImage graphic;
 
 
   Star(TuioObject blurp) {
@@ -16,13 +17,14 @@ class Star extends Body {
   }
   
   
-  Star(PVector pos, int diameter, int mass) {
+  Star(PImage graphicIn, PVector pos, int diameter, int mass) {
         BodyInit();
 
     isFake = true;
     this.position = pos;
     this.diameter = diameter;
     this.mass = mass;
+    graphic = graphicIn;
     allStars.add(this);
   }
 
@@ -47,7 +49,7 @@ class Star extends Body {
 
   void draw() {
     imageMode(CENTER);
-        image(star, position.x, position.y); 
+        image(graphic, position.x, position.y, diameter+15, diameter+15); 
 
     
   }

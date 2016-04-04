@@ -1,6 +1,6 @@
 PImage planet;
-PImage planetInvert;
 PImage star;
+PImage blackHole;
 short mass;
 byte h;
 PFont font;
@@ -8,6 +8,7 @@ boolean release = false;
 boolean isOver = false;
 
 Star sun;
+Star secondSun;
 
 float spring = 0.01;
 
@@ -32,12 +33,13 @@ void setup(){
   tuioClient  = new TuioProcessing(this);
 
   frameRate(60);
-  planet = loadImage("earth.png");
-  planetInvert = loadImage("earthInv.png");
-  star = loadImage("star.png");
+  planet = loadImage("planet.png");
+  star = loadImage("redDwarf.png");
+  blackHole = loadImage("blackHole.png");
   allComets = new ArrayList();
   allBodies = new ArrayList();
-  //sun = new Star(new PVector(600, 350), star.width-15, 5000); //15 pixel padding for sun "fuzzyness"
+  sun = new Star(blackHole, new PVector(800, 550), 50, 5000); //15 pixel padding for sun "fuzzyness"
+  secondSun = new Star(star, new PVector(300, 150), 150, 5000); //15 pixel padding for sun "fuzzyness"
   h = 80;
   font = createFont("Onyx", 12);
   
