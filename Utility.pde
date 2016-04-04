@@ -1,4 +1,5 @@
 public void Popup(PVector position, String[] info){
+  
   int textSize = 12;
   textSize(textSize);
   int boxHeight = (info.length + 2) * textSize;
@@ -8,9 +9,6 @@ public void Popup(PVector position, String[] info){
     boxWidth = max(boxWidth, (int)textWidth(info[s]) + textSize * 2);
   }
   
-  stroke(0);
-  strokeWeight(1);
-  strokeCap(PROJECT);
 
   fill(255);
   rectMode(CORNER);
@@ -28,5 +26,6 @@ public void Popup(PVector position, String[] info){
   }
   
   popMatrix();
+
   
 }

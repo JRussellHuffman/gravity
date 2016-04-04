@@ -69,6 +69,8 @@ void draw(){
   for(Body damned : toDestroy){
     damned.Die();
   }
+  
+  Popup(new PVector(mouseX, mouseY), new String[]{"DERP_1", "DERP_2", "DERP_3"});
 }
 
 void mousePressed(){

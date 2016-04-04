@@ -6,6 +6,7 @@ public class Cursor {
   boolean isMouse = false;
   
   PVector velocity;
+  float velocity_scale = .5;
 
 
   ArrayList<PVector> posHistory = new ArrayList<PVector>(); //used to calculate average position
@@ -65,7 +66,7 @@ public class Cursor {
   void spawnComet(PVector position, PVector velocity) {
    
 
-    Comet newComet = new Comet(position, velocity, 10);
+    Comet newComet = new Comet(position, new PVector(velocity.x * velocity_scale, velocity.y * velocity_scale), 10);
   }
 
   public void UpdatePosition() {
@@ -86,7 +87,6 @@ public class Cursor {
             posDeltaHistory.add(new PVector((posHistory.get(posHistory.size()-1)).x - (posHistory.get(posHistory.size()-2)).x,
                                             (posHistory.get(posHistory.size()-1)).y - (posHistory.get(posHistory.size()-2)).y));
                                             
-                                            println((posHistory.get(posHistory.size()-1)).x - (posHistory.get(posHistory.size()-2)).x);
     }
     else{
       //posDeltaHistory.add(new PVector(0,0));

@@ -10,8 +10,6 @@ class Comet extends Body {
   }
 
   void Update() {
-        println(position);
-
     collide();
     applyGravity();
     move();
