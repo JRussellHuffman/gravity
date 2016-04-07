@@ -1,6 +1,8 @@
 PImage planet;
 PImage star;
 PImage blackHole;
+PImage redDwarf;
+PImage rock;
 short mass;
 byte h;
 PFont font;
@@ -20,12 +22,14 @@ ArrayList<Star> allStars = new ArrayList();
 ArrayList<Body> allBodies = new ArrayList();
 ArrayList<Grid> grid = new ArrayList();
 ArrayList<Cursor> cursors = new ArrayList();
+ArrayList<Pullout> allPullout = new ArrayList();
 
 Cursor mouseCursor;
 
 
   
 void setup(){
+  //size(displayWidth, displayHeight);
   size(1280, 720);
   SetupStarMap();
   SetupCursorMap();
@@ -34,11 +38,13 @@ void setup(){
 
   frameRate(60);
   planet = loadImage("planet.png");
-  star = loadImage("redDwarf.png");
+  star = loadImage("star.png");
+  redDwarf = loadImage("redDwarf.png");
   blackHole = loadImage("blackHole.png");
+  rock = loadImage("rock.png");
   allComets = new ArrayList();
   allBodies = new ArrayList();
-  sun = new Star(blackHole, new PVector(800, 550), 50, 5000); //15 pixel padding for sun "fuzzyness"
+  //sun = new Star(redDwarf, new PVector(800, 550), 100, 5000); //15 pixel padding for sun "fuzzyness"
   secondSun = new Star(star, new PVector(300, 150), 150, 5000); //15 pixel padding for sun "fuzzyness"
   h = 80;
   font = createFont("Onyx", 12);
@@ -72,7 +78,9 @@ void draw(){
     damned.Die();
   }
   
-  Popup(new PVector(mouseX, mouseY), new String[]{"DERP_1", "DERP_2", "DERP_3"});
+  //Popup(new PVector(mouseX, mouseY), new String[]{"DERP_1", "DERP_2", "DERP_3"});
+  
+  
 }
 
 void mousePressed(){

@@ -4,6 +4,7 @@ abstract class Body {
 
   float diameter;
   float mass;
+  //int increment = 0;
   
   abstract void Update();
   void Die(){
@@ -41,6 +42,34 @@ abstract class Body {
     direction.mult((mass*2)/(d*d)); //double mass to exaggerate effect on grid
     return direction;
   }
+  
+//  void pullOut() {
+//    pushStyle();
+//    fill(255);
+//    stroke(255);
+//    strokeWeight(1);
+//    line(position.x, position.y, position.x+50, position.y-50);
+//    line(position.x+50, position.y-50, position.x+150, position.y-50);
+//    rect(position.x+70, position.y-150, 160, 100);
+//    fill(0);
+//    stroke(0);
+//    text(increment, position.x + 90, position.y - 120); 
+//    popStyle();
+//  }
+  
+//  void callPullout() {
+//    increment ++;
+//    if (increment < 100) {
+//      pullOut();
+//    }
+//  }
+  
+//  void callPullout() {
+//     boolean first = true;
+//     int increment = 0;
+//     
+//     int 
+//  }
   
 //this method does crazy things...  
 //  PVector gridReturn(PVector otherPos) {

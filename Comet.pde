@@ -1,12 +1,32 @@
+int cometsOnScreen = 0;
+
 class Comet extends Body {
+  
+  int cometID;
+  float randomness;
+  
+  Pullout newPullout;
+  Pullout newPlanet;
+  Pullout newComet;
 
   Comet(PVector pos, PVector vel, float diameter) {
         BodyInit();
+        
+    randomness = random(0, 10);
+    println(randomness);
 
     position = pos;
     velocity = vel;
     this.diameter = diameter;
     allComets.add(this);
+    cometsOnScreen ++;
+    cometID = cometsOnScreen;
+    println(cometID);
+    
+    newPullout = new Pullout(position.x,position.y, "You created a space rock!!");
+    newPlanet = new Pullout(position.x,position.y, "You created a planet \n this time!!");
+    newComet = new Pullout(position.x,position.y, "You created comet!!");
+
   }
 
   void Update() {
@@ -16,6 +36,7 @@ class Comet extends Body {
     collide();
     applyGravity();
     move();
+    removeOffScreen();
     this.draw();
   }
   
@@ -24,17 +45,26 @@ class Comet extends Body {
     super.Die();
 
   }
+  
+  void removeOffScreen() {
+    if(position.x < -300 || position.y > width+300 || position.y < -300 || position.y > height+300){
+      cometsOnScreen --;
+      Destroy();
+    }
+  }
 
   void collide() {
     
     for(Planet planet : allPlanets){
       if(dist(position.x, position.y, planet.position.x, planet.position.y) <= (diameter + planet.diameter)/2){
+        cometsOnScreen --;
         Destroy();
       }
     }
     
      for(Star star : allStars){
        if(dist(position.x, position.y, star.position.x, star.position.y) <= (diameter + star.diameter)/2){
+         cometsOnScreen --;
          Destroy();
        }
      }
@@ -95,32 +125,45 @@ class Comet extends Body {
   }
   
   void tail() {
-    float distanceFromStar = 0;
-    PVector direction;
-    for(Star star : allStars){
-      distanceFromStar = dist(position.x, position.y, star.position.x, star.position.y);
-       
-      direction = new PVector(position.x - star.position.x, position.y - star.position.y);
-      direction.normalize();      
-      fill(185, 234, 255, 15);
-      //draw several ellipse to show effect
-      for (int i = 4; i < 12; i++) {
-        ellipse(position.x+(direction.x*((i-5)*500/distanceFromStar)), position.y+(direction.y*((i-5)*500/distanceFromStar)), 5/distanceFromStar*i*100, 5/distanceFromStar*i*100);
+    if (randomness > 1) {
+       image(rock, position.x, position.y, diameter, diameter);
+       if (cometID == 1) {
+          newPullout.update(position.x, position.y);
+       }
+    } else {
+      float distanceFromStar = 0;
+      PVector direction;
+      for(Star star : allStars){
+        distanceFromStar = dist(position.x, position.y, star.position.x, star.position.y);
+         
+        direction = new PVector(position.x - star.position.x, position.y - star.position.y);
+        direction.normalize();      
+        fill(185, 234, 255, 15);
+        //draw several ellipse to show effect
+        for (int i = 4; i < 12; i++) {
+          ellipse(position.x+(direction.x*((i-5)*500/distanceFromStar)), position.y+(direction.y*((i-5)*500/distanceFromStar)), 5/distanceFromStar*i*100, 5/distanceFromStar*i*100);
+        }
+        newComet.update(position.x, position.y);
+        fill(220, 255,240);
+        ellipse(position.x, position.y, diameter, diameter);
       }
     }
     
   }
 
   void draw() {
-    if (diameter > 15) {
+    if (diameter > 15) { //turn into planet
       fill(220,(255/(diameter/10)),(240/(diameter/10)), 100);
       ellipse(position.x, position.y, diameter+5, diameter+5);
       image(planet, position.x, position.y, diameter, diameter);
+      newPlanet.update(position.x, position.y);
     } else {
       tail();
-      //fill(220,(255/(diameter/10)),(240/(diameter/10)));
-      fill(220, 255,240);
-      ellipse(position.x, position.y, diameter, diameter);
+//        fill(220, 255,240);
+//        ellipse(position.x, position.y, diameter, diameter);
+//        if (cometID == 1) {
+//          newPullout.update(position.x, position.y);
+//        }
     }
   }
 }
