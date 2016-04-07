@@ -56,7 +56,7 @@ class Grid {
     for(Star star : allStars){
       PVector gravity = star.gridGrav(gravInfluence);
       gravInfluence.add(gravity);
-      
+      //make grid regenerate
       if(dist(gravInfluence.x, gravInfluence.y, star.position.x, star.position.y) <= (diameter + star.diameter)/2){
         gravInfluence.x = springBack.x;
         gravInfluence.y = springBack.y;

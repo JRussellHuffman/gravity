@@ -96,6 +96,10 @@ void removeTuioBlob(TuioBlob tblb) {
 // called at the end of each TUIO frame
 void refresh(TuioTime frameTime) {
   if (verbose) println("frame #"+frameTime.getFrameID()+" ("+frameTime.getTotalMilliseconds()+")");
+//<<<<<<< Updated upstream
+//=======
+  //if (callback) redraw();
+//>>>>>>> Stashed changes
 }
 
 void TuioUpdate() {

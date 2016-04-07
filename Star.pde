@@ -10,6 +10,7 @@ class Star extends Body {
   float neutronRotate;
   StarType type;
   int massDifference;
+  PImage graphic;
 
   Star(TuioObject tuioObj) {
     
@@ -58,6 +59,7 @@ class Star extends Body {
     if (!isFake)starMap.remove(tobj.getSessionID());
     super.Die(); // Destroys the image of the star but leaves the gravity (when used alone).
   }
+
 
   void draw() { // Add here all the details that go with the star
     

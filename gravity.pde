@@ -1,5 +1,4 @@
 PImage planet;
-PImage planetInvert;
 PImage star;
 PImage redGiant;
 PImage redDwarf;
@@ -7,17 +6,19 @@ PImage blueStar;
 PImage nebulaBlue;
 PImage nebulaPurple;
 PImage nebulaYellow;
-PImage blackHole;
 PImage neutronStar;
 
+PImage blackHole;
+PImage rock;
 short mass;
 byte h;
 PFont font;
 boolean release = false;
 boolean isOver = false;
 
+
 Star sun; // Creation of the star object. INITIALIZING THE STAR OBJECT CALLED SUN
-Star deathStar;
+Star secondSun;
 
 float spring = 0.01;
 
@@ -29,6 +30,7 @@ ArrayList<Star> allStars = new ArrayList();
 ArrayList<Body> allBodies = new ArrayList();
 ArrayList<Grid> grid = new ArrayList();
 ArrayList<Cursor> cursors = new ArrayList();
+ArrayList<Pullout> allPullout = new ArrayList();
 
 Cursor mouseCursor;
 
@@ -42,8 +44,7 @@ void setup(){
   tuioClient  = new TuioProcessing(this);
 
   frameRate(60);
-  planet = loadImage("earth.png");
-  planetInvert = loadImage("earthInv.png");
+  planet = loadImage("planet.png");
   star = loadImage("star.png");
   redGiant = loadImage("redGiant.png");
   blueStar = loadImage("blueStar.png");
@@ -57,6 +58,7 @@ void setup(){
   allBodies = new ArrayList();
 //  sun = new Star(new PVector(600, 350), star.width-15, 5000); // Star.width is the width of the star image!!!!!!!!!! DAMMIT!!!!!!
 //  deathStar = new Star(new PVector(800, 350), star.width-15, 5000, star); //CREATING THE OBJECT IN THE SKETCH!!!
+  rock = loadImage("rock.png");
   h = 80;
   font = createFont("Onyx", 12);
   
@@ -77,7 +79,9 @@ void draw(){
   noStroke();
   
 //  rect(tuioX,tuioY,100,100);
- 
+ for(Cursor cur : cursors){
+    cur.Update();
+  }
   
   for(Body hotBod : allBodies){
     hotBod.Update(); // Updating all of the tuio objects on the sketch
@@ -86,6 +90,10 @@ void draw(){
   for(Body damned : toDestroy){
     damned.Die(); // Destroys the objects that are set to destroy (Comets that go away from the sketch for instance)
   }
+  
+  //Popup(new PVector(mouseX, mouseY), new String[]{"DERP_1", "DERP_2", "DERP_3"});
+  
+  
 }
 
 void mousePressed(){
