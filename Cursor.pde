@@ -1,4 +1,4 @@
-public class Cursor {
+public class Cursor { // What is this?
   PVector position;
   TuioCursor tuioCursor;
   int spawnTime;
@@ -109,4 +109,5 @@ public class Cursor {
     velocity.x = avg_x/numVals;
     velocity.y = avg_y/numVals;  
   }
+
 }

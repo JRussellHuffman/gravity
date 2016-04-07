@@ -6,11 +6,9 @@ enum TuioAction
     
 };
 
-enum StarType
+enum StarType // Here is where we create the types of stars or celestial bodies to pair them with a fiducial value
 {
   YELLOW,
   RED_DWARF,
-  GREEN_GIANT,
-  BLACK_HALFLING,
-  
+  BLUE,
 }

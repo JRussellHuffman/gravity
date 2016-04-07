@@ -1,4 +1,4 @@
-HashMap<Long, Star> starMap;
+HashMap<Long, Star> starMap; // What is this?
 
 void SetupStarMap() {
   starMap = new HashMap<Long, Star>();
@@ -11,15 +11,13 @@ void SetupCursorMap() {
 }
 
 
-HashMap<Integer, StarType> idToType;
+HashMap<Integer, StarType> idToType; // This matches integers to star types
 
 void SetupIdToType() {
   idToType = new HashMap<Integer, StarType>();
 
-  idToType.put(0, StarType.YELLOW);
-  idToType.put(1, StarType.RED_DWARF);
-
-
+  idToType.put(49, StarType.YELLOW);
+  idToType.put(33, StarType.RED_DWARF);
+  idToType.put(20, StarType.BLUE);
   
 }
-

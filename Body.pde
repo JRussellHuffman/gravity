@@ -1,21 +1,21 @@
 abstract class Body {
+  
+// This is an abstract class, this class does not have a constructor but initializes the variables that will be used on other sub-classes like star.
   PVector position;
-    PVector velocity;
-
+  PVector velocity;
   float diameter;
   float mass;
   //int increment = 0;
   
   abstract void Update();
   void Die(){
-  allBodies.remove(this);
+    allBodies.remove(this);
   }
   
   void BodyInit(){
     allBodies.add(this);
-        position = new PVector();
-        velocity = new PVector();
-
+    position = new PVector();
+    velocity = new PVector();
   }
   
   void Destroy(){
