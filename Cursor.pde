@@ -1,4 +1,4 @@
-public class Cursor {
+public class Cursor { // What is this?
   PVector position;
   TuioCursor tuioCursor;
   int spawnTime;
@@ -67,4 +67,3 @@ public class Cursor {
     Comet newComet = new Comet(new PVector(randomX, randomY), new PVector(randomVelocityX, randomVelocityY), 10);
   }
 }
-

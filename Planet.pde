@@ -9,8 +9,6 @@ class Planet extends Body {
 
   }
   
-  
-  
   void Update(){
     this.draw();
   }
