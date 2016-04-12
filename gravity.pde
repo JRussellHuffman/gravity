@@ -1,12 +1,14 @@
 PImage planet;
 PImage star;
 PImage redGiant;
+PImage orangeGiant;
 PImage redDwarf;
 PImage blueStar;
 PImage nebulaBlue;
 PImage nebulaPurple;
 PImage nebulaYellow;
 PImage neutronStar;
+PImage whiteDwarf;
 
 PImage blackHole;
 PImage rock;
@@ -47,6 +49,7 @@ void setup(){
   planet = loadImage("planet.png");
   star = loadImage("star.png");
   redGiant = loadImage("redGiant.png");
+  orangeGiant = loadImage("orangeGiant.png");
   blueStar = loadImage("blueStar.png");
   redDwarf = loadImage("redDwarf.png");
   nebulaBlue = loadImage("nebulaBlue.png");
@@ -54,6 +57,7 @@ void setup(){
   nebulaPurple = loadImage("nebulaPurple.png");
   blackHole = loadImage("blackHole.png");
   neutronStar = loadImage("neutronStar.png");
+  whiteDwarf = loadImage("whiteDwarf.png");
   allComets = new ArrayList();
   allBodies = new ArrayList();
 //  sun = new Star(new PVector(600, 350), star.width-15, 5000); // Star.width is the width of the star image!!!!!!!!!! DAMMIT!!!!!!
