@@ -11,10 +11,11 @@ class Star extends Body {
   float neutronRotate;
   StarType type;
   int massDifference;
+  int xDifference;
   PImage graphic;
   float pulsarOrHole;
   float neutronOrPulsar;    
-  int supernovaColor; // USE THIS TO CHANGE THE COLOR OF THE SUPERNOVA
+  int supernovaColor; // USE THIS TO CHANGE THE COLOR OF THE SUPERNOVA OR SPACE NEBULAE
 
   Star(TuioObject tuioObj) {
     
@@ -106,6 +107,10 @@ class Star extends Body {
       } else {
         massDifference = 0;   
       }
+      
+      if(lifeOfStar <= 3){
+        completeLifeOfStar -= 40;
+      }
             
     } else if(lifeOfStar == 0){ // Death of the star
       
@@ -114,8 +119,19 @@ class Star extends Body {
       if(type == StarType.YELLOW || type == StarType.RED_DWARF){ // Supernova
         image = whiteDwarf;
         
+        if(supernovaColor == 1){
+          nebula = planetaryNebulaeOne;
+          xDifference = 0;
+        } else if (supernovaColor == 2){
+          nebula = planetaryNebulaeTwo;
+          xDifference = 0;
+        } else {
+          nebula = planetaryNebulaeThree;
+          xDifference = 4;
+        }
+        
         if(nebulaDuration >= 1){
-          image(nebula, position.x, position.y, 5 + explosionX, 2 + explosionY); 
+          image(nebula, position.x + xDifference, position.y + xDifference, 5 + explosionX, 2 + explosionY); 
         }
         
         if(nebulaDuration >= 0){
@@ -127,9 +143,9 @@ class Star extends Body {
         diameter = image.width + 10;
         mass = 700;
         
-        if(explosionX < 500){
-            explosionX += 5;
-            explosionY += 2.5;
+        if(explosionX < 160){
+            explosionX += 1.2;
+            explosionY += 1;
         }
         
       } else if (type == StarType.BLUE){
@@ -155,9 +171,11 @@ class Star extends Body {
          noFill();
          strokeWeight(0.7);
          strokeCap(ROUND);
-         for(int i = 0; i < 5; i++){
+         for(int i = 0; i < 4; i++){
+           int randomStuff = int(random(30,50));
            ellipseMode(CENTER);
-           ellipse((position.x + random(-5,5)), (position.y + random(-5,5)),random(-60,60) ,random(-60,60) );
+           ellipse((position.x + int(random(-15,15))),position.y , randomStuff, randomStuff);
+           //random(-60,60) ,random(-60,60) );
          }
        strokeWeight(4);
        noStroke();
@@ -169,7 +187,7 @@ class Star extends Body {
        translate(position.x, position.y);
        rotate(radians(neutronRotate));
        image(neutronStar,0 ,0, 30, 30);
-       neutronRotate += 50;
+       neutronRotate += 70;
        popMatrix();
              
        image = neutronStar;
@@ -212,24 +230,38 @@ class Star extends Body {
         diameter = star.width;
         image = star;
         nebula = nebulaBlue;
+<<<<<<< Updated upstream
         lifeOfStar = 1600;
+=======
+        lifeOfStar = 100;
+        supernovaColor = int(random(1,4));
+>>>>>>> Stashed changes
       break;
       case RED_DWARF:
         mass = 6000;
         diameter = redDwarf.width;
         image = redDwarf;
         nebula = nebulaYellow;
+<<<<<<< Updated upstream
         lifeOfStar = 2400;
+=======
+        lifeOfStar = 100;
+        supernovaColor = int(random(1,4));
+>>>>>>> Stashed changes
       break;
       case BLUE:
         mass = 9000;
         diameter = blueStar.width;
         image = blueStar;
         nebula = nebulaPurple;
+<<<<<<< Updated upstream
         lifeOfStar = 800;
+=======
+        lifeOfStar = 100;
+>>>>>>> Stashed changes
         pulsarOrHole = random(0,1);
         neutronOrPulsar = random(0,1);
-        supernovaColor = int(random(1,3));
+        supernovaColor = int(random(1,4));
       break;
       default:
       break;
