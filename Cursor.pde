@@ -1,5 +1,6 @@
 public class Cursor { // What is this?
   PVector position;
+  PVector startPosition;
   TuioCursor tuioCursor;
   int spawnTime;
   boolean dead;
@@ -20,11 +21,13 @@ public class Cursor { // What is this?
     setTuioCursor(c);
     UpdateFromTuio(c);
     cursorMap.put(c.getSessionID(), this);
+    startPosition = new PVector(position.x, position.y);
   }
 
   Cursor() {
     Init();
     position = new PVector(mouseX, mouseY);
+    startPosition = new PVector(position.x, position.y);
     isMouse = true;
   }
 
@@ -34,7 +37,7 @@ public class Cursor { // What is this?
     cursors.add(this);
     position = new PVector();
     velocity = new PVector(0,0);
-        lastUpdateTime = millis();
+    lastUpdateTime = millis();
 
   }
 
@@ -46,10 +49,15 @@ public class Cursor { // What is this?
 
 
   void Update() {
-
+    
     UpdatePosition();
             lastUpdateTime = millis();
-
+            
+            pushStyle();
+            stroke(255);
+            strokeWeight(3);
+            line(startPosition.x, startPosition.y, position.x, position.y);
+            popStyle();
   }
 
   void OnRemove() {
@@ -105,9 +113,13 @@ public class Cursor { // What is this?
       avg_x += posDeltaHistory.get(i).x;
       avg_y += posDeltaHistory.get(i).y;
     }
-
+    
+    /* this method of determining initial velocity isn't working with responsiveness of current table
     velocity.x = avg_x/numVals;
-    velocity.y = avg_y/numVals;  
+    velocity.y = avg_y/numVals;
+  */  
+  float velocityScale = .3;
+  velocity = new PVector((position.x - startPosition.x) * velocityScale, (position.y - startPosition.y) * velocityScale);
   }
 
 }

@@ -1,12 +1,17 @@
 PImage planet;
 PImage star;
 PImage redGiant;
+PImage orangeGiant;
 PImage redDwarf;
 PImage blueStar;
 PImage nebulaBlue;
 PImage nebulaPurple;
 PImage nebulaYellow;
 PImage neutronStar;
+PImage whiteDwarf;
+PImage planetaryNebulaeOne;
+PImage planetaryNebulaeTwo;
+PImage planetaryNebulaeThree;
 
 PImage blackHole;
 PImage rock;
@@ -47,6 +52,7 @@ void setup(){
   planet = loadImage("planet.png");
   star = loadImage("star.png");
   redGiant = loadImage("redGiant.png");
+  orangeGiant = loadImage("orangeGiant.png");
   blueStar = loadImage("blueStar.png");
   redDwarf = loadImage("redDwarf.png");
   nebulaBlue = loadImage("nebulaBlue.png");
@@ -54,6 +60,10 @@ void setup(){
   nebulaPurple = loadImage("nebulaPurple.png");
   blackHole = loadImage("blackHole.png");
   neutronStar = loadImage("neutronStar.png");
+  whiteDwarf = loadImage("whiteDwarf.png");
+  planetaryNebulaeOne = loadImage("planetaryNebulaeOne.png");
+  planetaryNebulaeTwo = loadImage("planetaryNebulaeTwo.png");
+  planetaryNebulaeThree = loadImage("planetaryNebulaeThree.png");
   allComets = new ArrayList();
   allBodies = new ArrayList();
 //  sun = new Star(new PVector(600, 350), star.width-15, 5000); // Star.width is the width of the star image!!!!!!!!!! DAMMIT!!!!!!
@@ -109,6 +119,8 @@ void mouseReleased() {
 
 void keyPressed(){
   if (key == 'c'){
-    allComets.clear();
+    for(Body hotBod : allBodies){
+    hotBod.Destroy(); 
+  }
   }
 }
