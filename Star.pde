@@ -61,9 +61,9 @@ class Star extends Body {
 
   void Die() {
     println("star die");
-//    allStars.remove(this); // Gets rid of the gravity of the star but leaves the image (when used alone).
+    allStars.remove(this); // Gets rid of the gravity of the star but leaves the image (when used alone).
     if (!isFake)starMap.remove(tobj.getSessionID());
-//    super.Die(); // Destroys the image of the star but leaves the gravity (when used alone).
+    super.Die(); // Destroys the image of the star but leaves the gravity (when used alone).
   }
 
 
@@ -122,7 +122,7 @@ class Star extends Body {
           nebulaDuration -= 1;  
         }
         
-        println(nebulaDuration);
+       // println(nebulaDuration);
         image(image, position.x, position.y);
         diameter = image.width + 10;
         mass = 700;
@@ -212,21 +212,21 @@ class Star extends Body {
         diameter = star.width;
         image = star;
         nebula = nebulaBlue;
-        lifeOfStar = 800;
+        lifeOfStar = 1600;
       break;
       case RED_DWARF:
         mass = 6000;
         diameter = redDwarf.width;
         image = redDwarf;
         nebula = nebulaYellow;
-        lifeOfStar = 1200;
+        lifeOfStar = 2400;
       break;
       case BLUE:
         mass = 9000;
         diameter = blueStar.width;
         image = blueStar;
         nebula = nebulaPurple;
-        lifeOfStar = 200;
+        lifeOfStar = 800;
         pulsarOrHole = random(0,1);
         neutronOrPulsar = random(0,1);
         supernovaColor = int(random(1,3));

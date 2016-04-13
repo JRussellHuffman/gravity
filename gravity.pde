@@ -113,6 +113,8 @@ void mouseReleased() {
 
 void keyPressed(){
   if (key == 'c'){
-    allComets.clear();
+    for(Body hotBod : allBodies){
+    hotBod.Destroy(); 
+  }
   }
 }

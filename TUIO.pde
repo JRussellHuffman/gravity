@@ -116,7 +116,7 @@ void TuioUpdate() {
 
       Star remStar = starMap.get(curObj.getSessionID());
       if (remStar != null) {
-        remStar.Die();
+        //remStar.Die();
       }
       break;
 
