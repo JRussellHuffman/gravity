@@ -26,16 +26,18 @@ class Pullout {
   
   void render(float xpos, float ypos) {
     pushStyle();
-    fill(255);
+    fill(0);
     stroke(255);
     strokeWeight(1);
     line(xpos, ypos, xpos+50, ypos-50);
     line(xpos+50, ypos-50, xpos+150, ypos-50);
-    rect(xpos+70, ypos-150, 160, 100);
+    rect(xpos+70, ypos-150, 200, 100);
     fill(0);
     stroke(0);
     increment ++;
     textAlign(LEFT);
+    fill(255);
+    textSize(16); 
     text(text, xpos + 90, ypos - 120); 
     popStyle();
   }
