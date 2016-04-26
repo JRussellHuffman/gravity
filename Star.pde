@@ -53,7 +53,7 @@ class Star extends Body {
     neutronStarText = new Pullout(position.x,position.y, "You created a \nneutron star!");
     blackHoleText = new Pullout(position.x,position.y, "You created an \nblack hole!");
     blueStarText = new Pullout(position.x,position.y, "You created a \nblue star!");
-    standardStarText = new Pullout(position.x,position.y, "You created a \nyellow star!");
+    standardStarText = new Pullout(position.x,position.y, "You created a \n star! wow!");
   } 
   
   
