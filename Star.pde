@@ -23,7 +23,7 @@ class Star extends Body {
     //println("new star");
     diameter = star.width-15;
     mass = 4000;
-    lifeOfStar = 50;
+    lifeOfStar = 500;
     explosionX = 0;
     explosionY = 0;
     neutronRotate = 1;
@@ -230,35 +230,23 @@ class Star extends Body {
         diameter = star.width;
         image = star;
         nebula = nebulaBlue;
-<<<<<<< Updated upstream
         lifeOfStar = 1600;
-=======
-        lifeOfStar = 100;
         supernovaColor = int(random(1,4));
->>>>>>> Stashed changes
       break;
       case RED_DWARF:
         mass = 6000;
         diameter = redDwarf.width;
         image = redDwarf;
         nebula = nebulaYellow;
-<<<<<<< Updated upstream
         lifeOfStar = 2400;
-=======
-        lifeOfStar = 100;
         supernovaColor = int(random(1,4));
->>>>>>> Stashed changes
       break;
       case BLUE:
         mass = 9000;
         diameter = blueStar.width;
         image = blueStar;
         nebula = nebulaPurple;
-<<<<<<< Updated upstream
         lifeOfStar = 800;
-=======
-        lifeOfStar = 100;
->>>>>>> Stashed changes
         pulsarOrHole = random(0,1);
         neutronOrPulsar = random(0,1);
         supernovaColor = int(random(1,4));
