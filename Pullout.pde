@@ -35,7 +35,8 @@ class Pullout {
     fill(0);
     stroke(0);
     increment ++;
-    text(increment + "\n" + text, xpos + 90, ypos - 120); 
+    textAlign(LEFT);
+    text(text, xpos + 90, ypos - 120); 
     popStyle();
   }
   

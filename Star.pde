@@ -16,6 +16,15 @@ class Star extends Body {
   float pulsarOrHole;
   float neutronOrPulsar;    
   int supernovaColor; // USE THIS TO CHANGE THE COLOR OF THE SUPERNOVA OR SPACE NEBULAE
+  
+  //pullout for each type of star
+  Pullout redGiantText;
+  Pullout orangeGiantText;
+  Pullout whiteDwarfText;
+  Pullout neutronStarText;
+  Pullout blackHoleText;
+  Pullout blueStarText;
+  Pullout standardStarText;
 
   Star(TuioObject tuioObj) {
     
@@ -36,6 +45,15 @@ class Star extends Body {
     allStars.add(this);
     starMap.put(tuioObj.getSessionID(), this);
     CreateFromTuio(tuioObj);
+    
+    //add text for stars
+    redGiantText = new Pullout(position.x,position.y, "You created a \nred giant! \nit's huge!");
+    orangeGiantText = new Pullout(position.x,position.y, "You created an \norange giant! \nit's huge!");
+    whiteDwarfText = new Pullout(position.x,position.y, "You created a \nwhite dwarf! \nit's tiny!");
+    neutronStarText = new Pullout(position.x,position.y, "You created a \nneutron star!");
+    blackHoleText = new Pullout(position.x,position.y, "You created an \nblack hole!");
+    blueStarText = new Pullout(position.x,position.y, "You created a \nblue star!");
+    standardStarText = new Pullout(position.x,position.y, "You created a \nyellow star!");
   } 
   
   
@@ -47,6 +65,17 @@ class Star extends Body {
     this.mass = mass;
     this.image = image;
     allStars.add(this);
+    lifeOfStar = 250;
+  
+    //add text for stars (same as other constructor
+    redGiantText = new Pullout(position.x,position.y, "You created a \nred giant! \nit's huge!");
+    orangeGiantText = new Pullout(position.x,position.y, "You created an \norange giant! \nit's huge!");
+    whiteDwarfText = new Pullout(position.x,position.y, "You created a \nwhite dwarf! \nit's tiny!");
+    neutronStarText = new Pullout(position.x,position.y, "You created a \nneutron star!");
+    blackHoleText = new Pullout(position.x,position.y, "You created an \nblack hole!");
+    blueStarText = new Pullout(position.x,position.y, "You created a \nblue star!");
+    standardStarText = new Pullout(position.x,position.y, "You created a \nyellow star!");
+    
   }
 
   void Update() {
@@ -69,7 +98,8 @@ class Star extends Body {
 
 
   void draw() { // Add here all the details that go with the star
-    
+  
+    standardStarText.update(position.x, position.y);
     textAlign(CENTER);
     text(lifeOfStar, position.x, position.y - 120);
 
@@ -82,19 +112,21 @@ class Star extends Body {
       diameter = image.width + completeLifeOfStar + massDifference;
       pushMatrix(); 
       imageMode(CENTER);
-      image(image, position.x, position.y, image.width + completeLifeOfStar + massDifference, image.height + completeLifeOfStar + massDifference);
+      image(image, position.x, position.y, image.width+50 + completeLifeOfStar + massDifference, image.height+50 + completeLifeOfStar + massDifference);
       popMatrix();
       
       if(lifeOfStar <= 250) { // Need to fix with Blue stars
-        
         if(type != StarType.RED_DWARF){
         image = orangeGiant;
+        orangeGiantText.update(position.x, position.y);
         } else {
-          image = redGiant;   
+          image = redGiant;  
+          redGiantText.update(position.x, position.y); 
         }
         
         if(lifeOfStar <= 100){ 
           image = redGiant;  
+          redGiantText.update(position.x, position.y);
         }
         
         if(type == StarType.YELLOW){
@@ -118,6 +150,7 @@ class Star extends Body {
       
       if(type == StarType.YELLOW || type == StarType.RED_DWARF){ // Supernova
         image = whiteDwarf;
+        whiteDwarfText.update(position.x, position.y);
         
         if(supernovaColor == 1){
           nebula = planetaryNebulaeOne;
@@ -191,6 +224,7 @@ class Star extends Body {
        popMatrix();
              
        image = neutronStar;
+       neutronStarText.update(position.x, position.y);
        diameter = 30;
        mass = 3000;
        
@@ -198,6 +232,7 @@ class Star extends Body {
         
           image(blackHole, position.x, position.y, 100, 100);
           image = blackHole;
+          blackHoleText.update(position.x, position.y);
           diameter = 100;
           mass = 10000;   
           
@@ -230,35 +265,35 @@ class Star extends Body {
         diameter = star.width;
         image = star;
         nebula = nebulaBlue;
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
         lifeOfStar = 1600;
-=======
-        lifeOfStar = 100;
-        supernovaColor = int(random(1,4));
->>>>>>> Stashed changes
+//=======
+        //lifeOfStar = 100;
+        //supernovaColor = int(random(1,4));
+//>>>>>>> Stashed changes
       break;
       case RED_DWARF:
         mass = 6000;
         diameter = redDwarf.width;
         image = redDwarf;
         nebula = nebulaYellow;
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
         lifeOfStar = 2400;
-=======
-        lifeOfStar = 100;
-        supernovaColor = int(random(1,4));
->>>>>>> Stashed changes
+//=======
+        //lifeOfStar = 100;
+        //supernovaColor = int(random(1,4));
+//>>>>>>> Stashed changes
       break;
       case BLUE:
         mass = 9000;
         diameter = blueStar.width;
         image = blueStar;
         nebula = nebulaPurple;
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
         lifeOfStar = 800;
-=======
-        lifeOfStar = 100;
->>>>>>> Stashed changes
+//=======
+        //lifeOfStar = 100;
+//>>>>>>> Stashed changes
         pulsarOrHole = random(0,1);
         neutronOrPulsar = random(0,1);
         supernovaColor = int(random(1,4));
