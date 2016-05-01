@@ -66,7 +66,8 @@ void setup(){
   planetaryNebulaeThree = loadImage("planetaryNebulaeThree.png");
   allComets = new ArrayList();
   allBodies = new ArrayList();
-//  sun = new Star(new PVector(600, 350), star.width-15, 5000, star); // Star.width is the width of the star image!!!!!!!!!! DAMMIT!!!!!!
+
+  sun = new Star(new PVector(600, 350), star.width-15, 5000, star); // Star.width is the width of the star image!!!!!!!!!! DAMMIT!!!!!!
 //  deathStar = new Star(new PVector(800, 350), star.width-15, 5000, star); //CREATING THE OBJECT IN THE SKETCH!!!
   rock = loadImage("rock.png");
   h = 80;
@@ -103,7 +104,7 @@ void draw(){
   
   //Popup(new PVector(mouseX, mouseY), new String[]{"DERP_1", "DERP_2", "DERP_3"});
   
-  
+  learningPanel();
 }
 
 void mousePressed(){
@@ -120,7 +121,13 @@ void mouseReleased() {
 void keyPressed(){
   if (key == 'c'){
     for(Body hotBod : allBodies){
-    hotBod.Destroy(); 
-  }
+      hotBod.Destroy(); 
+    }
+  } else if (key == 'l') {
+    if (open == false){
+      open = true;
+    } else {
+      open = false;
+    }
   }
 }

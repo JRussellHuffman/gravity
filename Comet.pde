@@ -5,6 +5,7 @@ class Comet extends Body {
   int cometID;
   float randomness;
   
+  //pullouts for each type of orbiting rock
   Pullout newPullout;
   Pullout newPlanet;
   Pullout newComet;
@@ -13,7 +14,6 @@ class Comet extends Body {
         BodyInit();
         
     randomness = random(0, 10);
-    println(randomness);
 
     position = pos;
     velocity = vel;
@@ -21,9 +21,10 @@ class Comet extends Body {
     allComets.add(this);
     cometsOnScreen ++;
     cometID = cometsOnScreen;
-    println(cometID);
+    //println(cometID);
     
-    newPullout = new Pullout(position.x,position.y, "You created a space rock!!");
+    //create text for each type of rock
+    newPullout = new Pullout(position.x,position.y, "You created a space \n rock!!");
     newPlanet = new Pullout(position.x,position.y, "You created a planet \n this time!!");
     newComet = new Pullout(position.x,position.y, "You created comet!!");
 
@@ -152,6 +153,9 @@ class Comet extends Body {
   }
 
   void draw() {
+    pushStyle();
+    ellipseMode(CENTER);
+    imageMode(CENTER);
     if (diameter > 15) { //turn into planet
       fill(220,(255/(diameter/10)),(240/(diameter/10)), 100);
       ellipse(position.x, position.y, diameter+5, diameter+5);
@@ -165,5 +169,6 @@ class Comet extends Body {
 //          newPullout.update(position.x, position.y);
 //        }
     }
+    popStyle();
   }
 }
