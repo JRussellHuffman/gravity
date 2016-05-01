@@ -54,7 +54,8 @@ class Star extends Body {
     neutronStarText = new Pullout(position.x,position.y, "You created a \nneutron star!");
     blackHoleText = new Pullout(position.x,position.y, "You created an \nblack hole!");
     blueStarText = new Pullout(position.x,position.y, "You created a \nblue star!");
-    standardStarText = new Pullout(position.x,position.y, "You created a \nyellow star!");
+
+    standardStarText = new Pullout(position.x,position.y, "You created a \n star! wow!");
   } 
   
   
@@ -67,6 +68,7 @@ class Star extends Body {
     this.image = image;
     allStars.add(this);
     lifeOfStar = 1250;
+
   
     //add text for stars (same as other constructor
     redGiantText = new Pullout(position.x,position.y, "You created a \nred giant! \nit's huge!");
@@ -129,7 +131,8 @@ class Star extends Body {
       image(image, position.x, position.y, image.width+50 + completeLifeOfStar + massDifference, image.height+50 + completeLifeOfStar + massDifference);
       popMatrix();
       
-      if(lifeOfStar <= 250) {
+
+      if(lifeOfStar <= 250) { 
         if(type != StarType.RED_DWARF){
         image = orangeGiant;
         orangeGiantText.update(position.x, position.y);
@@ -281,6 +284,7 @@ class Star extends Body {
         nebula = nebulaBlue;
         supernovaColor = int(random(1,4));
         lifeOfStar = 1600;
+
       break;
       case RED_DWARF:
         mass = 6000;
@@ -289,6 +293,7 @@ class Star extends Body {
         nebula = nebulaYellow;
         lifeOfStar = 2400;
         supernovaColor = int(random(1,4));
+
       break;
       case BLUE:
         mass = 9000;
@@ -296,6 +301,7 @@ class Star extends Body {
         image = blueStar;
         nebula = nebulaPurple;
         lifeOfStar = 800;
+
         pulsarOrHole = random(0,1);
         neutronOrPulsar = random(0,1);
         supernovaColor = int(random(1,4));

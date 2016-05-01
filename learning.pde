@@ -42,6 +42,12 @@ void learningPanel () {
 void drawPanel() {
   fill(255);
   rect(fromRight, 0, panelWidth, height);
+  pushStyle();
+  fill(0);
+  strokeWeight(1);
+  stroke(255);
+  rect(fromRight, 0, panelWidth, height);
+  popStyle();
 }
 
 void openClose() {
@@ -57,11 +63,14 @@ void openClose() {
 }
 
 void eachBody(int fromTop, PImage image, String text) {
-  fromTop *= 100;
+  fromTop *= 120;
   imageMode(CORNER);
   image(image, fromRight + 10, fromTop + 20, imageWidth, imageWidth);
   imageMode(CENTER);
   fill(0);
   textAlign(LEFT);
+  pushStyle();
+  fill(255);
   text(text, fromRight + imageWidth + 20, fromTop + 30, panelWidth - imageWidth - 40, 100);
+  popStyle();
 }

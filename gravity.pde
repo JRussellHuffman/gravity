@@ -40,7 +40,10 @@ ArrayList<Pullout> allPullout = new ArrayList();
 Cursor mouseCursor;
 
 
-  
+//boolean sketchFullScreen() {
+//  return (true);
+//}
+
 void setup(){
   size(displayWidth, displayHeight);
   SetupStarMap();
@@ -68,6 +71,7 @@ void setup(){
   allBodies = new ArrayList();
 
   sun = new Star(new PVector(600, 350), star.width-15, 5000, star); // Star.width is the width of the star image!!!!!!!!!! DAMMIT!!!!!!
+
 //  deathStar = new Star(new PVector(800, 350), star.width-15, 5000, star); //CREATING THE OBJECT IN THE SKETCH!!!
   rock = loadImage("rock.png");
   h = 80;
