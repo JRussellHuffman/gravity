@@ -31,7 +31,7 @@ abstract class Body {
     PVector direction = new PVector(position.x - otherPos.x, position.y - otherPos.y);
     direction.normalize();
     float d = dist(otherPos.x, otherPos.y, position.x, position.y);
-    direction.mult(mass/(d*d));
+    direction.mult(mass*2/(d*d));
     return direction;
   }
   

@@ -1,9 +1,9 @@
 //grid stuff
-int gap = 30;
+int gap = 50;
 int dotSize = 1;
 int roundedx;
 int roundedy;
-int gridSpring = 20; //lower number is strong
+int gridSpring = 30; //lower number is strong
 
 void initializeGrid () {
   gridSize(gap);

@@ -65,7 +65,7 @@ class Star extends Body {
     this.mass = mass;
     this.image = image;
     allStars.add(this);
-    lifeOfStar = 250;
+    lifeOfStar = 2450;
   
     //add text for stars (same as other constructor
     redGiantText = new Pullout(position.x,position.y, "You created a \nred giant! \nit's huge!");
