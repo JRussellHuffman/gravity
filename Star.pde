@@ -6,12 +6,14 @@ class Star extends Body {
   int lifeOfStar;
   int lifeOfStarText;
   float completeLifeOfStar;
+  float textGrowth;
   int explosionX;
   int explosionY;
   int nebulaDuration;
   float neutronRotate;
   StarType type;
   int massDifference;
+  int textDifference;
   int xDifference;
   PImage graphic;
   float pulsarOrHole;
@@ -67,7 +69,7 @@ class Star extends Body {
     this.mass = mass;
     this.image = image;
     allStars.add(this);
-    lifeOfStar = 1250;
+    lifeOfStar = 2400;
 
   
     //add text for stars (same as other constructor
@@ -104,26 +106,20 @@ class Star extends Body {
   
     standardStarText.update(position.x, position.y);
     
-    if(lifeOfStar >= 20) {
-    pushStyle();
-    textAlign(CENTER);
-    rectMode(CENTER);
-    textSize(16);
-    fill(0);
-    stroke(255);
-    strokeWeight(2);
-    rect(position.x, (position.y - 115) - completeLifeOfStar, 280, 25);
-    fill(255);
-    text("Age of the star: " +  lifeOfStarText + " million years", position.x, (position.y - 110) - completeLifeOfStar);
-    popStyle();
+    if(type == StarType.YELLOW){
+      textDifference = 0;  
+    } else if (type == StarType.RED_DWARF) {
+      textDifference = -28;  
+    } else if (type == StarType.BLUE) {
+      textDifference = 45;  
     }
-
+    
     if(lifeOfStar >= 1){ // Normal star after being stamped
       
       lifeOfStar --;
       lifeOfStarText ++;
       
-      completeLifeOfStar += 0.09;
+      completeLifeOfStar += 0.06;
       
       diameter = image.width + completeLifeOfStar + massDifference;
       pushMatrix(); 
@@ -146,7 +142,7 @@ class Star extends Body {
           redGiantText.update(position.x, position.y);
         }
         
-        if(type == StarType.YELLOW){
+      if(type == StarType.YELLOW){
           massDifference = 0;  
         } else if (type == StarType.RED_DWARF) {
           massDifference = -60;  
@@ -159,6 +155,21 @@ class Star extends Body {
       
       if(lifeOfStar <= 3){
         completeLifeOfStar -= 40;
+      }
+      
+      if(lifeOfStar >= 8) {
+        textGrowth += 0.03;
+        pushStyle();
+        textAlign(CENTER);
+        rectMode(CENTER);
+        textSize(16);
+        fill(0);
+        stroke(255);
+        strokeWeight(2);
+        rect(position.x, (position.y + (105 + textDifference)) + textGrowth, 280, 25);
+        fill(255);
+        text("Age of the star: " +  lifeOfStarText + " million years", position.x, (position.y + (110 + textDifference)) + textGrowth);
+        popStyle();
       }
             
     } else if(lifeOfStar == 0){ // Death of the star
